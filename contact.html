@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — BetterModules</title>
+  <style>
+    :root { --bg: #0d0c10; --panel: #17151c; --text: #ffffff; --muted: #8c8994; --accent: #f5c211; --border: #2d2636; --logo-blend: screen; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { max-width: 800px; margin: 0 auto; padding: 24px 20px; background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; }
+    header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 24px; border-bottom: 1px solid var(--border); margin-bottom: 32px; }
+    .logo-img { height: 84px; width: auto; mix-blend-mode: var(--logo-blend); filter: contrast(1.15); }
+    nav a { color: var(--text); text-decoration: none; font-size: 14px; margin-left: 20px; font-weight: 600; }
+    nav a.active { color: var(--accent); }
+    .contact-box { background: var(--panel); border: 1px solid var(--border); padding: 40px 24px; border-radius: 8px; text-align: center; }
+    .contact-box h2 { font-size: 22px; margin-bottom: 8px; }
+    .contact-box p { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+    .mail-link { display: inline-block; font-family: monospace; font-size: 16px; font-weight: 700; color: var(--accent); background: var(--bg); padding: 12px 24px; border: 1px solid var(--border); border-radius: 4px; text-decoration: none; }
+    .mail-link:hover { border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="bm.png" alt="BetterModules Logo" class="logo-img"></a>
+    <nav>
+      <a href="modules.html">Modules</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </header>
+
+  <section class="contact-box">
+    <h2>Have Hardware Frustrations?</h2>
+    <p>Tell us which generic module burnt your board or failed under load. Drop us a direct email:</p>
+    <a href="mailto:contact@bettermodules.com" class="mail-link">✉ contact@bettermodules.com</a>
+  </section>
+</body>
+</html>

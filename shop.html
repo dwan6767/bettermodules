@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — BetterModules</title>
+  <style>
+    :root { --bg: #0d0c10; --panel: #17151c; --text: #ffffff; --muted: #8c8994; --accent: #f5c211; --border: #2d2636; --logo-blend: screen; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { max-width: 800px; margin: 0 auto; padding: 24px 20px; background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; }
+    header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 24px; border-bottom: 1px solid var(--border); margin-bottom: 32px; }
+    .logo-img { height: 84px; width: auto; mix-blend-mode: var(--logo-blend); filter: contrast(1.15); }
+    nav a { color: var(--text); text-decoration: none; font-size: 14px; margin-left: 20px; font-weight: 600; }
+    nav a.active { color: var(--accent); }
+    .shop-notice { background: var(--panel); border: 1px dashed var(--accent); padding: 40px 24px; border-radius: 8px; text-align: center; }
+    .shop-notice h2 { font-size: 22px; color: var(--accent); margin-bottom: 12px; }
+    .shop-notice p { font-size: 15px; color: var(--muted); max-width: 50ch; margin: 0 auto 20px; }
+    .btn { display: inline-block; padding: 10px 20px; font-size: 13px; font-weight: 600; text-decoration: none; border-radius: 4px; background: var(--accent); color: #000; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="bm.png" alt="BetterModules Logo" class="logo-img"></a>
+    <nav>
+      <a href="modules.html">Modules</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="shop-notice">
+    <h2>🛒 Hardware Shop Status</h2>
+    <p>Nothing in production right now. We will notify you if enough people show interest in our bench runs!</p>
+    <a href="index.html#newsForm" class="btn">Join Interest List</a>
+  </section>
+</body>
+</html>

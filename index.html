@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BetterModules — Engineered Power Supplies</title>
+  <style>
+    :root {
+      --bg: #0d0c10;
+      --panel: #17151c;
+      --text: #ffffff;
+      --muted: #8c8994;
+      --accent: #f5c211;
+      --redstone: #c64600;
+      --border: #2d2636;
+      --logo-blend: screen;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px 20px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo-img { height: 84px; width: auto; mix-blend-mode: var(--logo-blend); filter: contrast(1.15); }
+    nav a { color: var(--text); text-decoration: none; font-size: 14px; margin-left: 20px; font-weight: 600; }
+    nav a:hover { color: var(--accent); }
+
+    .hero { margin: 48px 0 36px; }
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--panel);
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    h1 { font-size: 38px; line-height: 1.15; margin-bottom: 14px; letter-spacing: -0.02em; }
+    .lede { font-size: 16.5px; color: var(--muted); margin-bottom: 24px; max-width: 60ch; }
+    .btn { display: inline-block; padding: 10px 20px; font-size: 13px; font-weight: 600; text-decoration: none; border-radius: 4px; background: var(--accent); color: #000; }
+
+    /* Recent Build Container */
+    .highlight { background: var(--panel); border: 1px solid var(--redstone); padding: 24px; border-radius: 8px; margin-bottom: 40px; }
+    .highlight h3 { color: var(--accent); margin-bottom: 8px; font-size: 18px; }
+    .highlight p { font-size: 14px; margin-bottom: 12px; color: var(--muted); }
+    .specs { font-family: monospace; font-size: 12px; color: var(--accent); font-weight: 700; }
+    
+    .build-image-container {
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+    }
+    .build-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .newsletter-box { background: var(--panel); border: 1px solid var(--border); padding: 28px; border-radius: 8px; margin-bottom: 40px; }
+    .newsletter-form { display: flex; gap: 10px; margin-top: 12px; }
+    .newsletter-form input { flex: 1; padding: 10px 14px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 4px; outline: none; }
+    .newsletter-form button { background: var(--accent); color: #000; border: none; padding: 10px 18px; font-weight: 700; border-radius: 4px; cursor: pointer; }
+
+    footer { text-align: center; font-size: 13px; color: var(--muted); margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
+    footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html"><img src="bm.png" alt="BetterModules Logo" class="logo-img"></a>
+    <nav>
+      <a href="modules.html">Modules</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="tag">Fix your power supply first</span>
+    <h1>Stop Building On Weak Foundations.</h1>
+    <p class="lede">Generic modules craft broken builds. We build it better by choosing the right way of engineering.</p>
+    <a href="modules.html" class="btn">Explore Modules</a>
+  </section>
+
+  <!-- Dynamic Recent Build Section -->
+  <section class="highlight" id="recentBuildContainer">
+    <p style="color: var(--muted);">Loading recent build...</p>
+  </section>
+
+  <section class="newsletter-box">
+    <h2>Subscribe to Lab Notes</h2>
+    <p style="font-size: 14px; color: var(--muted);">Get notified when we release new hardware teardowns and schematics.</p>
+    <form class="newsletter-form" id="newsForm">
+      <input type="email" id="emailInput" placeholder="Enter your email address..." required>
+      <button type="submit">SUBSCRIBE</button>
+    </form>
+  </section>
+
+  <footer>
+    Have hardware frustrations? <a href="contact.html">Drop us a line</a> or mail directly at <a href="mailto:bettermodules@gmail.com">bettermodules@gmail.com</a>
+    <p style="margin-top: 8px; font-size: 11px;">BetterModules — Built on the bench, not in a boardroom.</p>
+  </footer>
+
+  <script>
+      const SUPABASE_URL = "https://riyftzdtprskxvrelkkw.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_90cLnhtygsLWuosJBvD2gw_RkfpC8g7";
+
+    // Fetch the most recent build image and details from Supabase
+    async function fetchRecentBuild() {
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/modules?select=*&order=created_at.desc&limit=1`, {
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": `Bearer ${SUPABASE_KEY}`
+          }
+        });
+        const data = await res.json();
+        const container = document.getElementById("recentBuildContainer");
+
+        if (!data || data.length === 0) {
+          container.innerHTML = "<h3>No recent builds published yet.</h3>";
+          return;
+        }
+
+        const build = data[0];
+        container.innerHTML = `
+          ${build.image_url ? `
+            <div class="build-image-container">
+              <img src="${build.image_url}" alt="${build.title}" class="build-img">
+            </div>
+          ` : ''}
+          <h3>Recent Build: ${build.title}</h3>
+          <p>${build.description}</p>
+          <div class="specs">▶ ${build.rev || 'REV 1.0'} | <a href="${build.schematic_url || '#'}" style="color: var(--accent);">VIEW SCHEMATIC</a></div>
+        `;
+      } catch (err) {
+        document.getElementById("recentBuildContainer").innerHTML = "<p style='color: var(--muted);'>Failed to load recent build.</p>";
+      }
+    }
+
+    // Handle Newsletter Form
+    document.getElementById("newsForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("emailInput").value;
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/subscribers`, {
+        method: "POST",
+        headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json", "Prefer": "return=minimal" },
+        body: JSON.stringify({ email })
+      });
+      if (res.ok) { alert("Subscribed successfully!"); document.getElementById("emailInput").value = ""; }
+      else { alert("Subscription failed or email already registered."); }
+    });
+
+    fetchRecentBuild();
+  </script>
+</body>
+</html>
